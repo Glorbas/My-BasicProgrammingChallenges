@@ -13,10 +13,10 @@ namespace ProgrammingTasks
             // Task1_PersonalGreeter();
             // Task2_SimpleCalculator();
             // Task3_GradeDeterminer();
-            Task4_TimesTableGenerator();
+            // Task4_TimesTableGenerator();
             // Task5_NumberGuessingGame();
             // Task6_ListAnalysis();
-            // Task7_PalindromeChecker();
+            Task7_PalindromeChecker();
             // Task8_FunctionBasedWordCounter();
             // Task9_SimpleContactBook();
             // Task10_BubbleSortAlgorithm();
@@ -154,6 +154,14 @@ namespace ProgrammingTasks
             // 4. Print the result in the format: "7 x 3 = 21".
 
             Console.WriteLine("\n");
+            int multiple;
+                Console.Write("Enter a number: ");
+                multiple = int.Parse(Console.ReadLine());
+                for (int i = 1; i < 13; i++)
+                {
+                    Console.WriteLine(multiple*i);
+                }
+                
         }
 
         /// <summary>
@@ -173,6 +181,27 @@ namespace ProgrammingTasks
             // 6. Once the user guesses correctly, print a success message and exit the loop.
 
             Console.WriteLine("\n");
+            
+            Random Random = new Random();
+            int secretNum = Random.Next(1, 101);
+            int guess = 0;
+            while (guess!=secretNum)
+            {
+                Console.WriteLine("Enter a number: ");
+                guess = int.Parse(Console.ReadLine());
+                if (guess == secretNum)
+                {
+                    Console.WriteLine("sucess!");
+                }
+                else if (guess > secretNum)
+                {
+                    Console.WriteLine("too high!");
+                }
+                else
+                {
+                    Console.WriteLine("too low!");
+                }
+            }
         }
 
         /// <summary>
@@ -189,6 +218,24 @@ namespace ProgrammingTasks
             //    (Hint: You can use the built-in .Sum(), .Average(), .Max(), .Min() methods).
 
             Console.WriteLine("\n");
+            List<int> numbers = new List<int>();
+            string UserChoice = "";
+            while (UserChoice != "done")
+            {
+                Console.Write("enter a number, or 'done' to exit: ");
+                UserChoice = Console.ReadLine();
+                if (UserChoice != "done")
+                {
+                    numbers.Add(int.Parse(UserChoice));
+                }
+
+                
+            }
+            Console.WriteLine(numbers.Sum());
+            Console.WriteLine((numbers.Average()));
+            Console.WriteLine((numbers.Max()));
+            Console.WriteLine((numbers.Min()));
+            
         }
 
         /// <summary>
@@ -205,6 +252,11 @@ namespace ProgrammingTasks
             //    (Hint: Use .ToLower() to make the comparison case-insensitive).
 
             Console.WriteLine("\n");
+            
+            Console.Write("enter a word: ");
+            string UserWord = Console.ReadLine();
+            string ReverseWord;
+
         }
 
         // This is the helper function for Task 8.
