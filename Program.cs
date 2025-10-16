@@ -255,8 +255,12 @@ namespace ProgrammingTasks
             
             Console.Write("enter a word: ");
             string UserWord = Console.ReadLine();
-            string ReverseWord;
-
+            string ReverseWord = "";
+            for (int i = UserWord.Length - 1; i >= 0; i--)
+            {
+                ReverseWord = UserWord[i].ToString();
+            }
+            Console.WriteLine(ReverseWord);
         }
 
         // This is the helper function for Task 8.
