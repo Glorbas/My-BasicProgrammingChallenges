@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic; // Needed for List<T>
-using System.Linq; // Needed for .Max(), .Min(), etc.
+using System.Linq;
+using System.Text; // Needed for .Max(), .Min(), etc.
 
 namespace ProgrammingTasks
 {
@@ -16,10 +17,10 @@ namespace ProgrammingTasks
             // Task4_TimesTableGenerator();
             // Task5_NumberGuessingGame();
             // Task6_ListAnalysis();
-            Task7_PalindromeChecker();
+            // Task7_PalindromeChecker();
             // Task8_FunctionBasedWordCounter();
             // Task9_SimpleContactBook();
-            // Task10_BubbleSortAlgorithm();
+            Task10_BubbleSortAlgorithm();
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace ProgrammingTasks
             Console.WriteLine("--- Task 3: Grade Determiner ---");
 
             // 1. Ask the user for a numerical score (0-100).
-            // 2. Use if-else if-else statements to determine the grade:
+            // 2. Use if-else statements to determine the grade:
             //    - 90-100: A
             //    - 80-89:  B
             //    - 70-79:  C
@@ -127,15 +128,15 @@ namespace ProgrammingTasks
             {
                 Console.WriteLine("D");
             }
-            else if (70 <= Grade && Grade < 80) 
+            else if (70 <= Grade && Grade < 80)
             {
                 Console.WriteLine("C");
             }
-            else if (80 <= Grade && Grade < 90) 
+            else if (80 <= Grade && Grade < 90)
             {
                 Console.WriteLine("B");
             }
-            else if (90 <= Grade && Grade <= 100) 
+            else if (90 <= Grade && Grade <= 100)
             {
                 Console.WriteLine("A");
             }
@@ -155,13 +156,12 @@ namespace ProgrammingTasks
 
             Console.WriteLine("\n");
             int multiple;
-                Console.Write("Enter a number: ");
-                multiple = int.Parse(Console.ReadLine());
-                for (int i = 1; i < 13; i++)
-                {
-                    Console.WriteLine(multiple*i);
-                }
-                
+            Console.Write("Enter a number: ");
+            multiple = int.Parse(Console.ReadLine());
+            for (int i = 1; i < 13; i++)
+            {
+                Console.WriteLine(multiple * i);
+            }
         }
 
         /// <summary>
@@ -181,17 +181,17 @@ namespace ProgrammingTasks
             // 6. Once the user guesses correctly, print a success message and exit the loop.
 
             Console.WriteLine("\n");
-            
+
             Random Random = new Random();
             int secretNum = Random.Next(1, 101);
             int guess = 0;
-            while (guess!=secretNum)
+            while (guess != secretNum)
             {
                 Console.WriteLine("Enter a number: ");
                 guess = int.Parse(Console.ReadLine());
                 if (guess == secretNum)
                 {
-                    Console.WriteLine("sucess!");
+                    Console.WriteLine("success!");
                 }
                 else if (guess > secretNum)
                 {
@@ -228,14 +228,12 @@ namespace ProgrammingTasks
                 {
                     numbers.Add(int.Parse(UserChoice));
                 }
-
-                
             }
+
             Console.WriteLine(numbers.Sum());
             Console.WriteLine((numbers.Average()));
             Console.WriteLine((numbers.Max()));
             Console.WriteLine((numbers.Min()));
-            
         }
 
         /// <summary>
@@ -252,23 +250,38 @@ namespace ProgrammingTasks
             //    (Hint: Use .ToLower() to make the comparison case-insensitive).
 
             Console.WriteLine("\n");
-            
+
             Console.Write("enter a word: ");
             string UserWord = Console.ReadLine();
-            string ReverseWord = "";
-            for (int i = UserWord.Length - 1; i >= 0; i--)
+            string TestWord = UserWord.ToLower();
+            StringBuilder
+                ReverseWord =
+                    new StringBuilder(); //string builder can be used to more efficiently handle strings especially if multiple concatenations are needed
+            for (int i = TestWord.Length - 1; i >= 0; i--)
             {
-                ReverseWord = UserWord[i].ToString();
+                ReverseWord.Append(
+                    UserWord
+                        [i]); //concatenates whatever is in the brackets to the end of the variable at the beginning 
             }
-            Console.WriteLine(ReverseWord);
+
+            if (ReverseWord.ToString() == TestWord)
+            {
+                Console.WriteLine("Palindrome found!");
+            }
+            else
+            {
+                Console.WriteLine("not a palindrome :(");
+            }
         }
 
         // This is the helper function for Task 8.
-        public static int CountWords(string sentence)
+        private static int CountWords(string UserSentence)
         {
             // 1. Split the sentence into an array of words using sentence.Split(' ').
             // 2. Return the length of the resulting array.
-            return 0; // Placeholder
+            // Placeholder
+            string[] SentenceArray = UserSentence.Split(' ');
+            return SentenceArray.Length;
         }
 
         /// <summary>
@@ -284,14 +297,22 @@ namespace ProgrammingTasks
             // 4. Print the result, e.g., "The sentence has X words."
 
             Console.WriteLine("\n");
+            string UserSentence = "";
+            int WordCounter = 0;
+            Console.Write("enter a sentence: ");
+            UserSentence = Console.ReadLine();
+            WordCounter = CountWords(UserSentence);
+            Console.WriteLine($"Sentence has {WordCounter} words");
         }
 
         // Define the struct for Task 9 here.
-        public struct Contact
+        private struct Contact
         {
             public string Name;
             public string PhoneNumber;
         }
+
+        private static List<Contact> contacts = new List<Contact>();
 
         /// <summary>
         /// Task 9: Create a simple contact book.
@@ -299,7 +320,7 @@ namespace ProgrammingTasks
         public static void Task9_SimpleContactBook()
         {
             Console.WriteLine("--- Task 9: Simple Contact Book ---");
-            List<Contact> contacts = new List<Contact>();
+
 
             // 1. Create a loop that displays a menu: "1. Add Contact", "2. Display Contacts", "3. Exit".
             // 2. If the user chooses 1:
@@ -311,6 +332,45 @@ namespace ProgrammingTasks
             // 4. If the user chooses 3, exit the loop.
 
             Console.WriteLine("\n");
+            bool Exit = true;
+            string MenuChoice = "";
+            while (Exit)
+            {
+                Console.Write("1. Add contact, 2. Display contacts, 3. Exit: ");
+                MenuChoice = Console.ReadLine();
+                switch (MenuChoice)
+                {
+                    case "1":
+                        ContactAdder();
+                        break;
+                    case "2":
+                        ContactDisplay();
+                        break;
+                    case "3":
+                        Exit = false;
+                        break;
+                }
+            }
+        }
+
+        private static void ContactAdder() //function to add a contact to contacts
+        {
+            Contact contact = new Contact();
+            Console.WriteLine("Enter a name: ");
+            contact.Name = Console.ReadLine();
+            Console.WriteLine("Enter a phone: ");
+            contact.PhoneNumber = Console.ReadLine();
+
+            contacts.Add(contact);
+        }
+
+        private static void ContactDisplay() //subroutine to display all contacts
+        {
+            for (int i = 0; i < contacts.Count; i++)
+            {
+                Console.Write($"{i + 1}.  {contacts[i].Name}");
+                Console.WriteLine($"  {contacts[i].PhoneNumber}");
+            }
         }
 
         /// <summary>
@@ -319,7 +379,7 @@ namespace ProgrammingTasks
         public static void Task10_BubbleSortAlgorithm()
         {
             Console.WriteLine("--- Task 10: Bubble Sort Algorithm ---");
-            int[] numbersToSort = { 5, 1, 4, 2, 8 };
+            int[] numbersToSort = { 10, 12, 13, 4, 5, 8, 9, 12, 34 };
             Console.WriteLine("Original array: " + string.Join(", ", numbersToSort));
 
 
@@ -330,6 +390,23 @@ namespace ProgrammingTasks
             //    - You'll need a temporary variable to hold one value during the swap.
             // 3. After the loops complete, print the sorted array.
 
+
+            int tempVar = 0;
+            for (int i = 0; i < numbersToSort.Length; i++)
+            {
+                for (int j = 0; j < numbersToSort[i]; j++)
+                {
+                    if (j < numbersToSort.Length - 1)
+                    {
+                        if (numbersToSort[j] > numbersToSort[j + 1])
+                        {
+                            tempVar = numbersToSort[j];
+                            numbersToSort[j] = numbersToSort[j + 1];
+                            numbersToSort[j + 1] = tempVar;
+                        }
+                    }
+                }
+            }
 
             Console.WriteLine("Sorted array: " + string.Join(", ", numbersToSort));
             Console.WriteLine("\n");
